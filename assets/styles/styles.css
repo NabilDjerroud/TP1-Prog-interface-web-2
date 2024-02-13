@@ -1,0 +1,151 @@
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filtres {
+  width: 20%;
+  padding: 20px;
+}
+
+.filtres ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/*transition depuis https://www.w3resource.com/html-css-exercise/html-css-practical-exercises/html-css-practical-exercise-15.php*/
+.filtres li {
+  display: block;
+  margin-top: 20px;
+  position: relative;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.filtres li:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.filtres li:hover:after {
+  transform: scale(1);
+  transform-origin: bottom left;
+}
+
+.selected {
+  text-decoration: underline 2px;
+  transition: transform 0.25s ease-in;
+}
+
+.livres {
+  width: auto;
+  display: grid;
+  flex-wrap: wrap;
+  justify-content: center;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.livres .livre {
+  width: 80%;
+  padding: 10px;
+  margin: 10px;
+  background-color: #fff;
+  transition: transform 0.6s ease;
+}
+
+.livres .livre:hover {
+  transform: translateY(-5px);
+}
+
+.livres .livre img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.livres .livre h2 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.livres .livre p {
+  margin: 5px 0;
+}
+
+.livres .livre button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.livres .livre button:hover {
+  background-color: #0056b3;
+}
+
+/*Panien*/
+.panier {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.panier img {
+  width: 40px;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Contenu du modal */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 5px;
+  position: relative;
+}
+
+/* Bouton de fermeture */
+[data-js-close-modal] {
+  position: absolute;
+  top: 10px;
+  right: 40px;
+  font-size: 54px;
+  cursor: pointer;
+}
+
+.disable-scroll-y {
+  overflow-y: hidden !important;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/styles/styles.css" />
+    <script type="module" src="assets/scripts/main.js"></script>
+    <title>Librairie</title>
+  </head>
+  <body>
+    <header>
+      <h1>Liste des livres</h1>
+      <div class="panier" data-js-panier-icon>
+        <img src="assets/img/panier-icon.svg" alt="Panier" id="panier-icon" />
+      </div>
+    </header>
+    <div class="container">
+      <aside class="filtres" data-js-filtres>
+        <ul>
+          <li data-js-filtre="Tous">Tous</li>
+          <li data-js-filtre="Nouveautés">Nouveautés</li>
+          <li data-js-filtre="Littérature">Littérature</li>
+          <li data-js-filtre="Art de vivre">Art de vivre</li>
+          <li data-js-filtre="BD, Jeunesse, Humour">BD, Jeunesse, Humour</li>
+          <li data-js-filtre="Culture et société">Culture et société</li>
+          <li data-js-filtre="Loisirs, Tourisme, Nature">
+            Loisirs, Tourisme, Nature
+          </li>
+          <li data-js-filtre="Savoir et science">Savoir et science</li>
+        </ul>
+      </aside>
+      <main class="livres" data-js-livres>
+        <!-- La grille de livres sera injectée ici -->
+      </main>
+    </div>
+    <div class="modal" data-js-modal>
+      <div class="modal-content" data-js-modal-content>
+        <!-- Contenu du modal sera injecté ici -->
+      </div>
+      <span class="close" data-js-close-modal>&times;</span>
+    </div>
+  </body>
+</html>
