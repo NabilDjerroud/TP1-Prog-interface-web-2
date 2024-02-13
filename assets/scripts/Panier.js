@@ -1,8 +1,9 @@
 import { livres } from "./livres.js";
-
 export class Panier {
+  #localStorageKey;
+
   constructor() {
-    this.localStorageKey = "panier";
+    this.#localStorageKey = "panier";
     this.init();
   }
 
@@ -27,7 +28,7 @@ export class Panier {
       prix: null,
     };
 
-    let panier = JSON.parse(localStorage.getItem(this.localStorageKey)) || [];
+    let panier = JSON.parse(localStorage.getItem(this.#localStorageKey)) || [];
 
     // Vérifier si le livre n'est pas déjà dans le panier
     let livreExiste = false;
@@ -45,7 +46,7 @@ export class Panier {
           if (l.titre === titre) {
             livre.prix = l.prix;
             panier.push(livre);
-            localStorage.setItem(this.localStorageKey, JSON.stringify(panier));
+            localStorage.setItem(this.#localStorageKey, JSON.stringify(panier));
             console.log("Livre ajouté au panier !");
           }
         }.bind(this)

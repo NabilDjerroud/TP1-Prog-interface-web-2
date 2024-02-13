@@ -2,12 +2,18 @@ import { livres } from "./livres.js";
 import { Tuile } from "./Tuile.js";
 
 export class Librairie {
+  #grilleLivres;
+  #filtres;
+  #modal;
+  #modalContent;
+  #btnCloseModal;
+
   constructor() {
-    this.grilleLivres = document.querySelector("[data-js-livres]");
-    this.filtres = document.querySelector("[data-js-filtres]");
-    this.modal = document.querySelector("[data-js-modal]");
-    this.modalContent = document.querySelector("[data-js-modal-content]");
-    this.btnCloseModal = document.querySelector("[data-js-close-modal]");
+    this.#grilleLivres = document.querySelector("[data-js-livres]");
+    this.#filtres = document.querySelector("[data-js-filtres]");
+    this.#modal = document.querySelector("[data-js-modal]");
+    this.#modalContent = document.querySelector("[data-js-modal-content]");
+    this.#btnCloseModal = document.querySelector("[data-js-close-modal]"); //à utiliser si je décommente l'ecouteur d'evenement pour le bouton X dans ecouterFermetureModal()
     this.init();
   }
 
@@ -31,31 +37,31 @@ export class Librairie {
   }
 
   afficherLivres(limite = livres.length, livresAFiltrer = livres) {
-    this.viderGrilleLivres();
+    this.#viderGrilleLivres();
 
     for (let i = 0; i < limite; i++) {
       const livreHTML = this.genererLivreHTML(livresAFiltrer[i], i);
-      this.grilleLivres.insertAdjacentHTML("beforeend", livreHTML);
+      this.#grilleLivres.insertAdjacentHTML("beforeend", livreHTML);
       new Tuile(
-        this.grilleLivres.lastElementChild,
-        this.modal,
-        this.modalContent
+        this.#grilleLivres.lastElementChild,
+        this.#modal,
+        this.#modalContent
       );
     }
   }
 
-  viderGrilleLivres() {
-    this.grilleLivres.innerHTML = "";
+  #viderGrilleLivres() {
+    this.#grilleLivres.innerHTML = "";
   }
 
   ecouterFiltres() {
-    this.filtres.addEventListener(
+    this.#filtres.addEventListener(
       "click",
       function (e) {
         if (e.target.dataset.jsFiltre) {
           const categorie = e.target.dataset.jsFiltre;
 
-          const filtres = this.filtres.querySelectorAll("li");
+          const filtres = this.#filtres.querySelectorAll("li");
           filtres.forEach(function (filtre) {
             filtre.classList.remove("selected");
           });
@@ -78,29 +84,29 @@ export class Librairie {
       }
     });
 
-    this.viderGrilleLivres();
+    this.#viderGrilleLivres();
     this.afficherLivres(livresFiltres.length, livresFiltres);
   }
 
   ecouterFermetureModal() {
     // j'ai ajouté un bouton X pour que lorsqu'on clique sur X le modal se ferme
     /*
-      this.btnCloseModal.addEventListener("click", function () {
-            this.modal.style.display = "none";
+      this.#btnCloseModal.addEventListener("click", function () {
+            this.#modal.style.display = "none";
             this.retablirScrollY(); 
         }.bind(this));*/
 
-    this.modal.addEventListener(
+    this.#modal.addEventListener(
       "click",
       function () {
-        this.modal.style.display = "none";
+        this.#modal.style.display = "none";
         this.retablirScrollY();
       }.bind(this)
     );
   }
 
   ouvrirModal() {
-    this.modal.style.display = "block";
+    this.#modal.style.display = "block";
     this.desactiverScrollY();
   }
 
@@ -132,17 +138,17 @@ export class Librairie {
         prixTotal += parseFloat(livres.prix);
       });
 
-      this.modalContent.innerHTML =
+      this.#modalContent.innerHTML =
         tableContent +
         `<tr><td>Total</td><td><strong>${prixTotal}$</strong></td></tr>`;
       tableContent += "</tbody>";
       tableContent += "</table>";
     } else {
-      this.modalContent.innerHTML =
+      this.#modalContent.innerHTML =
         "<p>Il n'y a aucun livre dans votre panier.</p>";
     }
 
-    this.modal.style.display = "block";
+    this.#modal.style.display = "block";
   }
 
   ecouterPanier() {
